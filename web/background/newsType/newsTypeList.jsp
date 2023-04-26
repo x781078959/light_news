@@ -30,12 +30,12 @@
 				<th>操作</th>
 			</tr>
 			<!--  -->
-			<c:forEach items="${ types }" var="type">
+			<c:forEach items="${types}" var="types">
 			<c:set var="i" value="${i+1}"></c:set>
 			<tr>
-					<td>${i }</td>
-					<td>${type.newsTypeId}</td>
-					<td>${type.typeName}</td>
+					<td>${i}</td>
+					<td>${types.newsTypeId}</td>
+					<td>${types.typeName}</td>
 					<td>
 						<button class="btn btn-info" type="button">修改</button>
 						<button class="btn btn-danger" type="button">删除</button>

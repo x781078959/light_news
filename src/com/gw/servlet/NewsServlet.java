@@ -2,9 +2,13 @@ package com.gw.servlet;
 
 import com.gw.criteria.NewsSearch;
 import com.gw.criteria.PageBean;
+import com.gw.pojo.News;
+import com.gw.pojo.NewsType;
 import com.gw.pojo.NewsVo;
 import com.gw.service.NewsService;
+import com.gw.service.TypeService;
 import com.gw.service.impl.NewsServiceImpl;
+import com.gw.service.impl.TypeServiceImpl;
 import com.gw.utils.PageUtil;
 import com.gw.utils.StringUtil;
 import jakarta.servlet.ServletException;
@@ -29,8 +33,7 @@ import java.util.List;
 public class NewsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private NewsService newsService = new NewsServiceImpl();
-
-
+    private TypeService typeService = new TypeServiceImpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
@@ -43,9 +46,44 @@ public class NewsServlet extends HttpServlet {
             backNewsList(request,response);
         }else if("deleteNews".equals(action)){
             deleteNews(request,response);
+        }else if("toSave".equals(action)){
+            toSave(request,response);
+        }else if("saveNews".equals(action)){
+            saveNews(request,response);
         }
     }
 
+    protected void saveNews(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //保存新闻
+        News news = new News();
+        news.setTitle(request.getParameter("title"));
+        news.setAuthor(request.getParameter("author"));
+        news.setTypeId(Integer.parseInt(request.getParameter("typeId")));
+        news.setContent(request.getParameter("content"));
+        news.setNewsId(Integer.parseInt(request.getParameter("newsId")));
+        news.setIsHot(Integer.parseInt(request.getParameter("isHot")));
+        news.setIsHead(Integer.parseInt(request.getParameter("isHead")));
+        int count = newsService.addNews(news);
+        PrintWriter out = response.getWriter();
+        if(count > 0){
+            out.print("true");
+        }else{
+            out.print("false");
+        }
+        out.flush();
+        out.close();
+    }
+
+    protected void toSave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取所有的类别
+        List<NewsType> types = typeService.queryAllType();
+        //将所有类别涉及到req域对象
+        request.setAttribute("types",types);
+        //请求转发到新闻的保存页面
+        request.getRequestDispatcher("/background/news/newsSave.jsp").forward(request,response);
+
+
+    }
     protected void deleteNews(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String newsId = request.getParameter("newsId");
         int count = newsService.deleteNewsById(Integer.parseInt(newsId));
@@ -84,25 +122,20 @@ public class NewsServlet extends HttpServlet {
             search = (NewsSearch) request.getSession().getAttribute("search");
         }
         //定义一页几条
-        int pageNum = 3;
+        int pageNum = 6;
 
         //构建pageBean
         PageBean pageBean = new PageBean(Integer.parseInt(page), pageNum);
         List<NewsVo> news = newsService.queryNewsByPage(search,pageBean);
         //查询总条数
         long count = newsService.queryNewsCount(search);
-//
+
 //        //定义地址的字符串
         String url = request.getContextPath()+"/news?action=backNewsList";
-//
+
 //        //获取分页代码的字符串
         String pageCode = PageUtil.getPagation(url, (int)count,Integer.parseInt(page) , pageNum);
-//
-//
-//        //调用serivce来准备数据,调用NewsServiceImpl的queryNewsByPage(NewsSearch newsSearch, PageBean pageBean)
-//
 
-//
 //        //加载到request
         request.setAttribute("news", news);
         request.setAttribute("pageCode", pageCode);

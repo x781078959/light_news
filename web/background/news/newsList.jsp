@@ -17,6 +17,22 @@
 <script src="bootstrap/js/bootstrap.js"></script>
 <script src="js/ckeditor/ckeditor.js"></script>
 <script src="js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript">
+		function newsDelete(newsId){
+			var flag = window.confirm("确定要删除本条新闻吗？");
+			if(flag){
+				$.post("news?action=deleteNews","newsId="+newsId,delNews);
+				function delNews(data){
+					if(data.indexOf("true")+1){
+						alert("删除成功！");
+						window.location.href = "news?action=backNewsList";
+					}else{
+						alert("删除失败！");
+					}
+				}
+			}
+		}
+	</script>
 <title>新闻维护</title>
 </head>
 <body>
@@ -60,21 +76,5 @@
 
 		<div class="pagination pagination-centered">${pageCode}</div>
 	</div>
-	<script type="text/javascript">
-		function newsDelete(newsId){
-			var flag = window.confirm("确定要删除本条新闻吗？");
-			if(flag){
-				$.post("news?action=deleteNews","newsId="+newsId,delNews);
-				function delNews(data){
-					if(data.indexOf("true")+1){
-                        alert("删除成功！");
-						window.location.href = "news?action=backNewsList";
-                    }else{
-                        alert("删除失败！");
-                    }
-				}
-			}
-		}
-	</script>
 </body>
 </html>

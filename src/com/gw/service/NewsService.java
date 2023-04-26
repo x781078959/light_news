@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gw.criteria.NewsSearch;
 import com.gw.criteria.PageBean;
+import com.gw.pojo.News;
 import com.gw.pojo.NewsVo;
 
 /**
@@ -20,7 +21,8 @@ public interface NewsService {
 		long  queryNewsCount(NewsSearch newsSearch);
 
 		int deleteNewsById(int id);
+		int addNews(News news);
 
-	//
+    //
 	
 }

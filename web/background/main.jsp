@@ -36,7 +36,7 @@
         var hour=time.getHours(); 
         var minutes=time.getMinutes(); 
         var second=time.getSeconds(); 
-        month<10?month='0'+month:month; 
+        month<10?month=month:month;
         month=month+1; 
         hour<10?hour='0'+hour:hour; 
         minutes<10?minutes='0'+minutes:minutes; 
@@ -62,7 +62,7 @@
   <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
   <h2><span class="icon-user"></span>新闻管理</h2>
   <ul style="display:block">
-    <li><a href="background/news/newsSave.jsp" target="right"><span class="icon-caret-right"></span>新闻添加</a></li>
+    <li><a href="news?action=toSave" target="right"><span class="icon-caret-right"></span>新闻添加</a></li>
     <li><a href="news?action=backNewsList" target="right"><span class="icon-caret-right"></span>新闻维护</a></li>
   </ul>   
   <h2><span class="icon-pencil-square-o"></span>类别管理</h2>
@@ -77,15 +77,15 @@
   </ul>  
 </div>
 <ul class="bread">
-  <li><a href="background/default.jsp" target="right" class="icon-home"> 首页</a></li>
+  <li><a href="background/default.jsp" target="right" class="icon-home">首页</a></li>
   <li><a id="a_leader_txt">网站信息</a></li>
-  <li><b>当前用户：</b><span style="color:red;">${curUser.userName }</span></li>
+  <li><b>当前用户：</b><span style="color:red;">${curUser.userName}</span></li>
 </ul>
 <div style="position: absolute; right: 15px;top: 80px;">
 <span class="currentTime"></span>
 </div>
 <div class="admin">
-  <iframe scrolling="auto" rameborder="0" src="background/default.jsp" name="right" width="100%" height="100%"></iframe>
+  <iframe rameborder="0" src="background/default.jsp" name="right" width="100%" height="100%"></iframe>
 </div>
 </body>
 </html>

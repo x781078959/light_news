@@ -6,8 +6,10 @@ import com.gw.criteria.NewsSearch;
 import com.gw.criteria.PageBean;
 import com.gw.dao.NewDao;
 import com.gw.dao.impl.NewDaoImpl;
+import com.gw.pojo.News;
 import com.gw.service.NewsService;
 import com.gw.pojo.NewsVo;
+import com.oracle.wls.shaded.org.apache.bcel.generic.NEW;
 
 public class NewsServiceImpl implements NewsService {
 
@@ -27,5 +29,10 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public int deleteNewsById(int id) {
 		return newDao.deleteNewsById(id);
+	}
+
+	@Override
+	public int addNews(News news) {
+		return newDao.addNews(news);
 	}
 }
