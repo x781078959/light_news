@@ -52,7 +52,7 @@ public class NewsServlet extends HttpServlet {
         }else if("toSave".equals(action)){
             toSave(request,response);
         }else if("saveNews".equals(action)){
-            xsaveNews(request,response);
+            saveNews(request,response);
         }else if("selectNewsById".equals(action)){
             selectNewsById(request,response);
         }
