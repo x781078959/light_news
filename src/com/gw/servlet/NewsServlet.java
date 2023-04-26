@@ -1,0 +1,115 @@
+package com.gw.servlet;
+
+import com.gw.criteria.NewsSearch;
+import com.gw.criteria.PageBean;
+import com.gw.pojo.NewsVo;
+import com.gw.service.NewsService;
+import com.gw.service.impl.NewsServiceImpl;
+import com.gw.utils.PageUtil;
+import com.gw.utils.StringUtil;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+/**
+ * ClassName: NewsServlet
+ * PackageName: com.gw.servlet
+ * Description: 处理新闻模块请求的servlet
+ *
+ * @Author: 谢金宸
+ * @Create: 2023.4.21 - 上午 9:14
+ * @Version: 1.0
+ */
+@WebServlet("/news")
+public class NewsServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private NewsService newsService = new NewsServiceImpl();
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //处理用户的请求
+        //据action的值调用不同的方法
+        String action = request.getParameter("action");
+
+        if("backNewsList".equals(action)){
+            backNewsList(request,response);
+        }else if("deleteNews".equals(action)){
+            deleteNews(request,response);
+        }
+    }
+
+    protected void deleteNews(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String newsId = request.getParameter("newsId");
+        int count = newsService.deleteNewsById(Integer.parseInt(newsId));
+        PrintWriter out = response.getWriter();
+        if(count > 0){
+            out.print("true");
+        }else{
+            out.print("false");
+        }
+        out.flush();
+        out.close();
+
+
+    }
+
+    protected void backNewsList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //获取查询条件
+        String title = request.getParameter("title");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        //封装查询条件NewsSearch
+        NewsSearch search = new NewsSearch();
+        search.setTitle(title);
+        search.setStartDate(startDate);
+        search.setEndDate(endDate);
+
+        //获取当前页
+        String page = request.getParameter("page");
+
+        if(StringUtil.isEmpty(page)){
+            page = "1";
+            //查询信息保存
+            request.getSession().setAttribute("search",search);
+        }else {
+            //从session取得查询信息
+            search = (NewsSearch) request.getSession().getAttribute("search");
+        }
+        //定义一页几条
+        int pageNum = 3;
+
+        //构建pageBean
+        PageBean pageBean = new PageBean(Integer.parseInt(page), pageNum);
+        List<NewsVo> news = newsService.queryNewsByPage(search,pageBean);
+        //查询总条数
+        long count = newsService.queryNewsCount(search);
+//
+//        //定义地址的字符串
+        String url = request.getContextPath()+"/news?action=backNewsList";
+//
+//        //获取分页代码的字符串
+        String pageCode = PageUtil.getPagation(url, (int)count,Integer.parseInt(page) , pageNum);
+//
+//
+//        //调用serivce来准备数据,调用NewsServiceImpl的queryNewsByPage(NewsSearch newsSearch, PageBean pageBean)
+//
+
+//
+//        //加载到request
+        request.setAttribute("news", news);
+        request.setAttribute("pageCode", pageCode);
+//
+//
+//        //请求转发           background/news/newsSave.jsp
+
+        request.getRequestDispatcher("/background/news/newsList.jsp").forward(request, response);
+    }
+}
