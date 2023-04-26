@@ -35,4 +35,14 @@ public class NewsServiceImpl implements NewsService {
 	public int addNews(News news) {
 		return newDao.addNews(news);
 	}
+
+	@Override
+	public int updateNews(News news) {
+		return newDao.updateNewsById(news);
+	}
+
+	@Override
+	public News queryNewsById(int id) {
+		return newDao.selectNewsById(id);
+	}
 }

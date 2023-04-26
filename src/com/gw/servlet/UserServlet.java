@@ -40,10 +40,10 @@ public class UserServlet extends HttpServlet {
             session.setAttribute("curUser", user);
             response.sendRedirect("background/main.jsp");
         }else {
-            String msg = "<script>alert('登录失败')</script>";
+            String msg = "<div>该用户不存在或密码错误!登录失败</div>";
+            //String msg = "<script>alert('登录失败')</script>";
             request.setAttribute("msg", msg);
             request.getRequestDispatcher("background/login.jsp").forward(request, response);
-            out.println("该用户不存在或密码错误" + "<a href=\"javascript:history.back(-1)\">返回登录</a>");//javascript:history.back(-1)
         }
     }
 }

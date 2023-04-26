@@ -146,7 +146,7 @@ public class NewDaoImpl implements NewDao{
 	public int addNews(News news) {
 		String sql ="insert into t_news values(null,?,?,?,?,?,?,?,?,?,?)";
 		Object[] params = {news.getTitle(), news.getContent(), news.getPublishDate(), news.getAuthor(), news.getTypeId(),news.getClick(),news.getIsHead(),
-				news.getIsImage(),news.getImageName()};
+				news.getIsImage(),news.getImageName(),news.getIsHot()};
 		try {
 			return  qr.update(sql, params);
 		} catch (SQLException e) {
@@ -177,9 +177,9 @@ public class NewDaoImpl implements NewDao{
 
 	@Override
 	public int updateNewsById(News news) {
-		String sql = "UPDATE t_news SET title=?,content=?,publishDate=?,author=?,typeId=?,click=?,isHead=?,isImage=?,imageName=? WHERE newsId =?";
-		Object[] params = {news.getTitle(), news.getContent(), news.getPublishDate(), news.getAuthor(), news.getTypeId(),news.getClick(),news.getIsHead(),
-				news.getIsImage(),news.getImageName(),news.getNewsId()};
+		String sql = "UPDATE t_news SET title=?,content=?,author=?,typeId=?,isHead=?,isHot=?,isImage=?,imageName=? WHERE newsId =?";
+		Object[] params = {news.getTitle(), news.getContent(), news.getAuthor(), news.getTypeId(),
+				news.getIsHead(), news.getIsHot(), news.getIsImage(),news.getImageName(),news.getNewsId()};
 		try {
 			return qr.update(sql, params);
 		} catch (SQLException e) {

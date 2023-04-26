@@ -54,8 +54,8 @@
     <h1><img src="background/resources/images/logo.jpg" class="radius-circle rotate-hover" height="50" alt="" />闪电新闻系统管理平台</h1>
   </div>
   <div class="head-l">
-  	<a class="button button-little bg-blue" href="a.jsp" target="_blank"><span class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;
-  	<a class="button button-little bg-red" href="javascript:logout();"><span class="icon-power-off"></span> 退出登录</a> 
+  	<a class="button button-little bg-blue" href="a.jsp" target="_blank"><span class="icon-home"></span>前台首页</a> &nbsp;&nbsp;
+  	<a class="button button-little bg-red" href="javascript:logout();"><span class="icon-power-off"></span>退出登录</a>
   </div>
 </div>
 <div class="leftnav">	

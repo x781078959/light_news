@@ -19,6 +19,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 /**
  * ClassName: NewsServlet
@@ -49,29 +52,58 @@ public class NewsServlet extends HttpServlet {
         }else if("toSave".equals(action)){
             toSave(request,response);
         }else if("saveNews".equals(action)){
-            saveNews(request,response);
+            xsaveNews(request,response);
+        }else if("selectNewsById".equals(action)){
+            selectNewsById(request,response);
         }
+    }
+
+    protected void selectNewsById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String newsId = request.getParameter("newsId");
+        News news = newsService.queryNewsById(Integer.parseInt(newsId));
+        request.setAttribute("news",news);
+        toSave(request,response);
+        request.getRequestDispatcher("/background/news/newsSave.jsp").forward(request,response);
     }
 
     protected void saveNews(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //保存新闻
+        String newsId = request.getParameter("newsId");//判断修改还是添加
+        String isHot = request.getParameter("isHot");
+        String isHead = request.getParameter("isHead");
+
         News news = new News();
         news.setTitle(request.getParameter("title"));
         news.setAuthor(request.getParameter("author"));
         news.setTypeId(Integer.parseInt(request.getParameter("typeId")));
         news.setContent(request.getParameter("content"));
-        news.setNewsId(Integer.parseInt(request.getParameter("newsId")));
-        news.setIsHot(Integer.parseInt(request.getParameter("isHot")));
-        news.setIsHead(Integer.parseInt(request.getParameter("isHead")));
-        int count = newsService.addNews(news);
-        PrintWriter out = response.getWriter();
-        if(count > 0){
-            out.print("true");
-        }else{
-            out.print("false");
+        if(StringUtil.isNotEmpty(newsId)) {
+            news.setNewsId(Integer.parseInt(newsId));
         }
-        out.flush();
-        out.close();
+        if(StringUtil.isNotEmpty(isHot)) {
+            news.setIsHot(Integer.parseInt(isHot));
+        }
+        if(StringUtil.isNotEmpty(isHead)) {
+            news.setIsHead(Integer.parseInt(isHead));
+        }
+        String type;
+        int rlt;
+        if(newsId==null || newsId.equals("")){
+            //添加新闻
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String publishDate = dateTimeFormatter.format(now);
+            news.setPublishDate(publishDate);
+            rlt = newsService.addNews(news);
+            type = "add";
+        }else{
+            //修改新闻
+            rlt = newsService.updateNews(news);
+            type = "update";
+        }
+        response.getWriter().print("{\"rlt\":"+rlt+",\"type\":\""+type+"\"}");
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     protected void toSave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -95,8 +127,6 @@ public class NewsServlet extends HttpServlet {
         }
         out.flush();
         out.close();
-
-
     }
 
     protected void backNewsList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

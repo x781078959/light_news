@@ -22,7 +22,8 @@ public interface NewsService {
 
 		int deleteNewsById(int id);
 		int addNews(News news);
-
+		int updateNews(News news);
+		News queryNewsById(int id);
     //
 	
 }

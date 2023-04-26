@@ -32,6 +32,10 @@
 				}
 			}
 		}
+
+		function updateNewsById(newsId){
+			window.location.href = 'news?action=selectNewsById&newsId='+newsId;
+		}
 	</script>
 <title>新闻维护</title>
 </head>
@@ -66,14 +70,13 @@
 					<td>${news.typeName}</td>
 					<td>${news.publishDate}</td>
 					<td>
-						<button class="btn  btn-info" type="button">修改</button>&nbsp;
+						<button class="btn  btn-info" type="button" onclick="updateNewsById(${news.newsId})">修改</button>&nbsp;
 						<button class="btn btn-danger" type="button" onclick="newsDelete(${news.newsId})">删除</button>
 					</td>
 				</tr>
 				</c:forEach>
 			</table>
 		</div>
-
 		<div class="pagination pagination-centered">${pageCode}</div>
 	</div>
 </body>
