@@ -185,22 +185,40 @@
         }
     </style>
 <script type="text/javascript">
-
-	
+    function focusNextInput(thisInput) {
+        var inputs = document.getElementsByTagName("input");
+        for(var i = 0;i<inputs.length;i++){
+            // 如果是最后一个，则焦点回到第一个(如果想实现按顺序可以登陆，可以写入登陆方法)
+            if(i==(inputs.length-1)){
+                inputs[0].focus(); break;
+            }else if(thisInput == inputs[i]){
+                inputs[i+1].focus(); break;
+            }
+        }
+    }
 </script>
 </head>
-<body>
+<body >
 <div class="login-box">
     <h2>闪电新闻系统登录</h2>
-    <form name='login' action='user?action=login' method='post'>
+    <form id='forms' name='login' action='user?action=login' method='post'>
         <div class="user-box">
-            <input type="text" name="userName" required="">
+            <input type="text" name="userName" required="" onkeydown="if(event.keyCode==13)focusNextInput(this);">
             <label>账号</label>
         </div>
         <div class="user-box">
-            <input type="password" name="password" required="">
+            <input type="password" name="password" required="" onkeydown="if(event.keyCode==13){document.login.submit();}">
             <label>密码</label>
         </div>
+
+        <a href="javascript:document.getElementById('forms').reset();">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            重置
+        </a>
+
         <a href="javascript:document.login.submit();">
             <span></span>
             <span></span>
