@@ -45,4 +45,6 @@ public class NewsServiceImpl implements NewsService {
 	public News queryNewsById(int id) {
 		return newDao.selectNewsById(id);
 	}
+
+
 }

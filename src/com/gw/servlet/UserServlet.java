@@ -1,5 +1,6 @@
 package com.gw.servlet;
 
+import com.gw.dto.UserDto;
 import com.gw.pojo.User;
 import com.gw.service.UserService;
 import com.gw.service.impl.UserServiceImpl;
@@ -43,26 +44,45 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String userName = request.getParameter("userName");
         String password= request.getParameter("password");
-        User user = userService.login(userName, password);
-        PrintWriter out = response.getWriter();
-        if(user!=null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("curUser", user);
-            String msg="<script>alert('登录成功');</script>";
-            //放到request域对象里面
-            request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/background/main.jsp").forward(request, response);
-        }else {
-            String error="<script>alert('用户名或密码错误');</script>";
-            String msg = "<div>该用户不存在或密码错误!登录失败</div>";
-            //放到request域对象里面，共享给login.jsp
-            request.setAttribute("error", error);
-            //请求转发
-            //String msg = "<script>alert('登录失败')</script>";
-            request.setAttribute("msg", msg);
-            request.getRequestDispatcher("/background/login.jsp").forward(request, response);
+        UserDto userDto = this.userService.login(userName, password);
+        switch (userDto.getCode()) {
+            case -1 -> {
+                request.setAttribute("usernameError", "用户名不存在");
+                request.getRequestDispatcher("/background/login.jsp").forward(request, response);
+            }
+            case -2 -> {
+                request.setAttribute("passwordError", "密码错误");
+                request.getRequestDispatcher("/background/login.jsp").forward(request, response);
+            }
+            case 0 -> {
+                //跳转到登录成功界面
+                HttpSession session = request.getSession();
+                session.setAttribute("curUser", userDto.getUser());
+                String msg = "<script>alert('登录成功');</script>";
+                //放到request域对象里面
+                request.setAttribute("msg", msg);
+                request.getRequestDispatcher("/background/main.jsp").forward(request, response);
+            }
         }
+//        if(user!=null) {
+//            HttpSession session = request.getSession();
+//            session.setAttribute("curUser", user);
+//            String msg="<script>alert('登录成功');</script>";
+//            //放到request域对象里面
+//            request.setAttribute("msg", msg);
+//            request.getRequestDispatcher("/background/main.jsp").forward(request, response);
+//        }else {
+//            String error="<script>alert('用户名或密码错误');</script>";
+//            String msg = "<div>该用户不存在或密码错误!登录失败</div>";
+//            //放到request域对象里面，共享给login.jsp
+//            request.setAttribute("error", error);
+//            //请求转发
+//            //String msg = "<script>alert('登录失败')</script>";
+//            request.setAttribute("msg", msg);
+//            request.getRequestDispatcher("/background/login.jsp").forward(request, response);
+//        }
     }
 }

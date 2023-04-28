@@ -63,4 +63,15 @@ public class UserDaoImpl implements UserDao {
         return 0;
     }
 
+    @Override
+    public User selectUserByName(String userName) {
+        QueryRunner qr = new QueryRunner(JdbcUtilsV2.getDataSource());
+        String sql = "select *from t_user where userName =?;";
+        User user = null;
+
+        try {
+            user = qr.query(sql, new BeanHandler<>(User.class), userName);
+        } catch (SQLException e) { e.printStackTrace(); }
+        return user;
+    }
 }

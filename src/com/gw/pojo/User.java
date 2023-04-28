@@ -1,6 +1,14 @@
 package com.gw.pojo;
 
 public class User {
+    public User(int userId, String userName, String password) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public User() {super();}
+
     private int userId;
     private String userName;
     private String password;
