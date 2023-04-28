@@ -42,7 +42,7 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public int deleteType(int id) {
-        return 0;
+        return typeDao.deleteTypeById(id);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public NewsType queryTypeById(String id) {
-        return null;
+    public NewsType queryTypeById(int id) {
+        return typeDao.selectTypeById(id);
     }
 }

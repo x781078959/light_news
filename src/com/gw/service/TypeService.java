@@ -25,5 +25,5 @@ public interface TypeService {
     //根据id修改类别
     public int updateType(int id, String typeName);
     //根据id查询类别
-    public NewsType queryTypeById(String id);
+    public NewsType queryTypeById(int id);
 }

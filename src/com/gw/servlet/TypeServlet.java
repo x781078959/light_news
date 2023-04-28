@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -32,8 +33,30 @@ public class TypeServlet extends HttpServlet {
         String action = req.getParameter("action");
         if("selectAll".equals(action)) {
             SelectAll(req, resp);
+        }else if(action.equals("saveType")){
+            SaveType(req, resp);
+        }else if(action.equals("deleteType")){
+            DeleteType(req, resp);
         }
 
+    }
+
+    protected void DeleteType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String typeName = req.getParameter("newsTypeId");
+        System.out.println(typeName);
+        PrintWriter out = resp.getWriter();
+        int i = typeService.deleteType(Integer.parseInt(typeName));
+        if(i>0){out.print("true");}else{out.print("false");}
+        out.flush();out.close();
+    }
+
+    protected void SaveType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String typeName = req.getParameter("typeName");
+        System.out.println(typeName);
+        PrintWriter out = resp.getWriter();
+        int i = typeService.addType(typeName);
+        if(i>0){out.print("true");}else{out.print("false");}
+        out.flush();out.close();
     }
 
     @Override

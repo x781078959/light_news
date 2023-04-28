@@ -19,8 +19,7 @@
 <script src="js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
 		function newsDelete(newsId){
-			var flag = window.confirm("确定要删除本条新闻吗？");
-			if(flag){
+			if(confirm("确定要删除本条新闻吗？")){
 				$.post("news?action=deleteNews","newsId="+newsId,delNews);
 				function delNews(data){
 					if(data.indexOf("true")+1){

@@ -16,7 +16,22 @@
 <script src="bootstrap/js/bootstrap.js"></script>
 <title>新闻网站后台管理</title>
 <script type="text/javascript">
-	
+	$(document).ready(function(){
+//当提交表单时验证内容，验证过提交到服务器
+		$("#btnSubmit").click(function(){
+			var typeName = document.getElementById("typeName").value;
+			$.post("type?action=saveType","typeName="+typeName,saveNews);
+			function saveNews(data){
+				if(data.indexOf("true")+1){
+					alert("添加成功！");
+					window.location.href = "type?action=selectAll";
+				}else{
+					alert("添加失败！");
+				}
+			}
+
+		})
+	})
 </script>
 </head>
 <body>
