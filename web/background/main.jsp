@@ -55,7 +55,7 @@
   </div>
   <div class="head-l">
   	<a class="button button-little bg-blue" href="a.jsp" target="_blank"><span class="icon-home"></span>前台首页</a> &nbsp;&nbsp;
-  	<a class="button button-little bg-red" href="javascript:logout();"><span class="icon-power-off"></span>退出登录</a>
+  	<a class="button button-little bg-red" href="user?action=logout"><span class="icon-power-off"></span>退出登录</a>
   </div>
 </div>
 <div class="leftnav">	
@@ -79,13 +79,14 @@
 <ul class="bread">
   <li><a href="background/default.jsp" target="right" class="icon-home">首页</a></li>
   <li><a id="a_leader_txt">网站信息</a></li>
-  <li><b>当前用户：</b><span style="color:red;">${curUser.userName}</span></li>
+  <li><b>欢迎您：</b><span style="color:red;">${curUser.userName}</span></li>
 </ul>
 <div style="position: absolute; right: 15px;top: 80px;">
 <span class="currentTime"></span>
 </div>
 <div class="admin">
-  <iframe rameborder="0" src="background/default.jsp" name="right" width="100%" height="100%"></iframe>
+  <iframe src="background/default.jsp" name="right" width="100%" height="100%"></iframe>
 </div>
+${msg}
 </body>
 </html>

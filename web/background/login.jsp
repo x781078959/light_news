@@ -227,6 +227,7 @@
             登录
         </a>
     </form>
+    ${error}
     <br>
     <font color="red">${msg}</font>
 </div>

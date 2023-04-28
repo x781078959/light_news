@@ -21,13 +21,25 @@ public class UserServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         if("login".equals(action)){
+            //登录
             login(request, response);
+        }else if(action.equals("logout")){
+            //调用退出登陆的方法
+            logout(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //设置网页响应类型
         doPost(request, response);
+    }
+
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //1.清除session
+        HttpSession session=request.getSession();
+        session.removeAttribute("curUser");
+        //2.跳转到登陆页
+        response.sendRedirect("/background/login.jsp");
     }
 
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,12 +50,19 @@ public class UserServlet extends HttpServlet {
         if(user!=null) {
             HttpSession session = request.getSession();
             session.setAttribute("curUser", user);
-            response.sendRedirect("background/main.jsp");
+            String msg="<script>alert('登录成功');</script>";
+            //放到request域对象里面
+            request.setAttribute("msg", msg);
+            request.getRequestDispatcher("/background/main.jsp").forward(request, response);
         }else {
+            String error="<script>alert('用户名或密码错误');</script>";
             String msg = "<div>该用户不存在或密码错误!登录失败</div>";
+            //放到request域对象里面，共享给login.jsp
+            request.setAttribute("error", error);
+            //请求转发
             //String msg = "<script>alert('登录失败')</script>";
             request.setAttribute("msg", msg);
-            request.getRequestDispatcher("background/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/background/login.jsp").forward(request, response);
         }
     }
 }
