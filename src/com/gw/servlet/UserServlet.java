@@ -27,6 +27,8 @@ public class UserServlet extends HttpServlet {
         }else if(action.equals("logout")){
             //调用退出登陆的方法
             logout(request, response);
+        }else{
+            request.getRequestDispatcher("/background/login.jsp").forward(request, response);
         }
     }
 
@@ -62,8 +64,9 @@ public class UserServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("curUser", userDto.getUser());
                 String msg = "<script>alert('登录成功');</script>";
+                request.getSession().setAttribute("userDto", userDto);
                 //放到request域对象里面
-                request.setAttribute("msg", msg);
+                //request.setAttribute("msg", msg);
                 request.getRequestDispatcher("/background/main.jsp").forward(request, response);
             }
         }

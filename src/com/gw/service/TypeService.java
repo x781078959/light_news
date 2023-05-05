@@ -1,5 +1,6 @@
 package com.gw.service;
 
+import com.gw.criteria.PageBean;
 import com.gw.pojo.NewsType;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface TypeService {
     public int updateType(int id, String typeName);
     //根据id查询类别
     public NewsType queryTypeById(int id);
+    long queryAllTypeCount(PageBean pageBean);
 }

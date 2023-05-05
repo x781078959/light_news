@@ -29,6 +29,10 @@
 			}
 		}
 	}
+
+	function updateType(newsTypeId){
+		window.location.href = 'type?action=selectTypeById&newsTypeId='+newsTypeId;
+	}
 </script>
 </head>
 <body>
@@ -49,13 +53,14 @@
 					<td>${types.newsTypeId}</td>
 					<td>${types.typeName}</td>
 					<td>
-						<button class="btn btn-info" type="button" >修改</button>
+						<button class="btn btn-info" type="button" onclick="updateType(${types.newsTypeId})">修改</button>
 						<button class="btn btn-danger" type="button" onclick="deleteType(${types.newsTypeId})">删除</button>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
+	<div class="pagination pagination-centered">${pageCode}</div>
 </div>
 </body>
 </html>

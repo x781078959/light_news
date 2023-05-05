@@ -20,9 +20,9 @@
     function focusNextInput(thisInput) {
         var inputs = document.getElementsByTagName("input");
         for(var i = 0;i<inputs.length;i++){
-            if(i==(inputs.length-1)){
+            if(i===(inputs.length-1)){
                 inputs[0].focus(); break;
-            }else if(thisInput == inputs[i]){
+            }else if(thisInput === inputs[i]){
                 inputs[i+1].focus(); break;
             }
         }
@@ -35,11 +35,11 @@
     <form id='forms' name='login' action='user?action=login' method='post'>
         <div class="user-box">
 
-            <input type="text" name="userName" required="" onkeydown="if(event.keyCode==13){focusNextInput(this);}">
+            <input type="text" name="userName" required="" onkeydown="if(event.keyCode===13){focusNextInput(this);}">
             <label>账号</label>
         </div>
         <div class="user-box">
-            <input type="password" name="password" required="" onkeydown="if(event.keyCode==13){document.login.submit();}">
+            <input type="password" name="password" required="" onkeydown="if(event.keyCode===13){document.login.submit();}">
             <label>密码</label>
         </div>
 

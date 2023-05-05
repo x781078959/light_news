@@ -1,8 +1,14 @@
 package com.gw.servlet;
 
+import com.gw.criteria.NewsSearch;
+import com.gw.criteria.PageBean;
+import com.gw.pojo.News;
 import com.gw.pojo.NewsType;
 import com.gw.service.TypeService;
 import com.gw.service.impl.TypeServiceImpl;
+import com.gw.utils.Constants;
+import com.gw.utils.PageUtil;
+import com.gw.utils.StringUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.util.List;
 
 /**
@@ -25,6 +32,7 @@ import java.util.List;
  */
 @WebServlet("/type")
 public class TypeServlet extends HttpServlet {
+    @Serial
     private  static final long serialVersionUID = 1L;
 
     private TypeService typeService = new TypeServiceImpl();
@@ -37,13 +45,38 @@ public class TypeServlet extends HttpServlet {
             SaveType(req, resp);
         }else if(action.equals("deleteType")){
             DeleteType(req, resp);
+        }else if(action.equals("selectTypeById")){
+            SelectTypeById(req, resp);
+        }else if(action.equals("updateType")){
+            UpdateType(req, resp);
+        }else if(action.equals("toType")){
+            resp.sendRedirect("/background/newsType/newsTypeSave.jsp");
         }
 
     }
 
+
+
+
+    protected void UpdateType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String typeName = req.getParameter("typeName");
+        String newsTypeId = req.getParameter("newsTypeId");
+        PrintWriter out = resp.getWriter();
+        int i = typeService.updateType(Integer.parseInt(newsTypeId),typeName);
+        if(i>0){out.print("true");}else{out.print("false");}
+        out.flush();out.close();
+    }
+
+    protected void SelectTypeById(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String newsTypeId = req.getParameter("newsTypeId");
+        NewsType newsType = typeService.queryTypeById(Integer.parseInt(newsTypeId));
+        req.setAttribute("newsType", newsType);
+        req.getRequestDispatcher("/background/newsType/newsTypeSave.jsp").forward(req,resp);
+    }
+
+
     protected void DeleteType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String typeName = req.getParameter("newsTypeId");
-        System.out.println(typeName);
         PrintWriter out = resp.getWriter();
         int i = typeService.deleteType(Integer.parseInt(typeName));
         if(i>0){out.print("true");}else{out.print("false");}
@@ -52,7 +85,6 @@ public class TypeServlet extends HttpServlet {
 
     protected void SaveType(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String typeName = req.getParameter("typeName");
-        System.out.println(typeName);
         PrintWriter out = resp.getWriter();
         int i = typeService.addType(typeName);
         if(i>0){out.print("true");}else{out.print("false");}
@@ -66,8 +98,18 @@ public class TypeServlet extends HttpServlet {
 
     protected void SelectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //准备所有类别的数据 -> 所有类别信息的数据
+//        String page = req.getParameter("page");
+//        if(StringUtil.isEmpty(page)){
+//            page = "1";
+//        }
+//        int pageNum = Constants.PAGE_SIZE;
+//        PageBean pageBean = new PageBean(Integer.parseInt(page), pageNum);
         List<NewsType> types = typeService.queryAllType();
-        //将数据设置到request域中
+//        long count = typeService.queryAllTypeCount(pageBean);
+//        String url = req.getContextPath()+"/type?action=selectAll";
+//        String pageCode = PageUtil.getPagation(url, (int)count,Integer.parseInt(page),pageNum);
+//        //将数据设置到request域中
+//        req.setAttribute("pageCode", pageCode);
         req.setAttribute("types", types);
         //请求转发 页面 background/newsType/newsTypeList.jsp
         req.getRequestDispatcher("/background/newsType/newsTypeList.jsp").forward(req, resp);

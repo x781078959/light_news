@@ -46,5 +46,29 @@ public class NewsServiceImpl implements NewsService {
 		return newDao.selectNewsById(id);
 	}
 
+	@Override
+	public int newsClick(int newsId) {
+		return newDao.newsClick(newsId);
+	}
+
+	@Override
+	public boolean existNewByTypeId(int typeId) {
+		return newDao.existNewByTypeId(typeId);
+	}
+
+	@Override
+	public List<News> newestNewsList() {
+		return newDao.newestNewsList();
+	}
+
+	@Override
+	public List<News> hotNewsList() {
+		return newDao.hotNewsList();
+	}
+
+	@Override
+	public List<NewsVo> allIndexNewsList(int typeId) {
+		return newDao.allIndexNewsList(typeId);
+	}
 
 }

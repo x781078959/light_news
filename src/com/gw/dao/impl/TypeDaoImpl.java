@@ -1,11 +1,13 @@
 package com.gw.dao.impl;
 
+import com.gw.criteria.PageBean;
 import com.gw.dao.TypeDao;
 import com.gw.pojo.NewsType;
 import com.gw.utils.JdbcUtilsV2;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -93,12 +95,22 @@ public class TypeDaoImpl implements TypeDao {
     public NewsType selectTypeByName(String typeName) {
         QueryRunner qr = new QueryRunner(JdbcUtilsV2.getDataSource());
         String sql = "select * from t_newstype where typeName = ?;";
-        NewsType type = null;
         try {
-            type = qr.query(sql, new BeanHandler<>(NewsType.class), typeName);
+            return qr.query(sql, new BeanHandler<>(NewsType.class), typeName);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return  type;
+    }
+
+    @Override
+    public long selectAllTypeCount(PageBean pageBean) {
+        QueryRunner qr = new QueryRunner(JdbcUtilsV2.getDataSource());
+        String sql = "select count(*) from t_newstype LIMIT ?,? ";
+        Object[] params = {pageBean.getStart(),pageBean.getPageSize()};
+        try {
+            return qr.query(sql, new ScalarHandler<>(),params);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -67,13 +67,13 @@
   </ul>   
   <h2><span class="icon-pencil-square-o"></span>类别管理</h2>
   <ul>
-    <li><a href="background/newsType/newsTypeSave.jsp" target="right"><span class="icon-caret-right"></span>类别添加</a></li>
+    <li><a href="type?action=toType" target="right"><span class="icon-caret-right"></span>类别添加</a></li>
     <li><a href="type?action=selectAll" target="right"><span class="icon-caret-right"></span>类别维护</a></li>   
   </ul>
   <h2><span class="icon-pencil-square-o"></span>友情链接</h2>
   <ul>
     <li><a href="background/link/linkAdd.jsp" target="right"><span class="icon-caret-right"></span>链接添加</a></li>
-    <li><a href="background/link/linkList.jsp" target="right"><span class="icon-caret-right"></span>链接维护</a></li>   
+    <li><a href="link?type=toLink" target="right"><span class="icon-caret-right"></span>链接维护</a></li>
   </ul>  
 </div>
 <ul class="bread">

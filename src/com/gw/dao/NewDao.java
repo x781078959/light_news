@@ -21,5 +21,36 @@ public interface NewDao {
 
 	News selectNewsById(int id);
 	int updateNewsById(News news);
-	
+
+	/**
+	 * 最近更新新闻
+	 * @return
+	 */
+	 List<News> newestNewsList();
+
+	/**
+	 * 热点新闻
+	 * @return
+	 */
+	 List<News> hotNewsList();
+
+	/**
+	 * 根据新闻类型获取新闻
+	 * @return
+	 */
+	 List<NewsVo> allIndexNewsList(int typeId);
+	/**
+	 * 查询新闻表中是否有此类别的新闻
+	 * @param typeId
+	 * @return
+	 */
+	 boolean existNewByTypeId(int typeId);
+
+	/**
+	 * 访问量
+	 * @param newsId
+	 * @return
+	 */
+	 int newsClick(int newsId);
+
 }

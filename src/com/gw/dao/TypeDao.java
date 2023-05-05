@@ -1,5 +1,6 @@
 package com.gw.dao;
 
+import com.gw.criteria.PageBean;
 import com.gw.pojo.NewsType;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface TypeDao {
     int modifyTypeById(int id, String typeName);
     //根据名称查询类别……
     NewsType selectTypeByName(String name);
+    long selectAllTypeCount(PageBean pageBean);
 }

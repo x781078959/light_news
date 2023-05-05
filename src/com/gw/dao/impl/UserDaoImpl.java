@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
     public User selectUserByNameAndPwd(String userName, String password){
 
         QueryRunner qr = new QueryRunner(JdbcUtilsV2.getDataSource());
-        String sql = "select *from t_user where userName = ? and password = ?;";
+        String sql = "select *from t_user where userName = ? and password = ? ;";
         Object[] params = {userName, password};
         User user = null;
 

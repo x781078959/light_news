@@ -61,8 +61,8 @@
 							author:author,
 							typeId:typeId,
 							content:content,
-							isHead:$('#isHead').val(),
-							isHot:$('#isHot').val(),
+							isHead:$("input[name='isHead']:checked").val(),
+							isHot:$("input[name='isHot']:checked").val(),
 							newsId:$('#newsId').val()
 						},
 						dataType:"json",
@@ -124,10 +124,10 @@
 					</td>
 					<td>
 						<label class="checkbox inline">
-						  <input type="checkbox" id="isHead" name="isHead" value="1" ${news.isHead == 1?'CHECKED':''}>头条
+						  <input type="checkbox" id="isHead" name="isHead" value="1" ${news.isHead == 1?'checked="checked"':''}>头条
 						</label>
 						<label class="checkbox inline">
-						  <input type="checkbox" id="isHot" name="isHot" value="1" ${news.isHot == 1?'CHECKED':''}>热点
+						  <input type="checkbox" id="isHot" name="isHot" value="1" ${news.isHot == 1?'checked="checked"':''}>热点
 						</label>
 					</td>
 				</tr>

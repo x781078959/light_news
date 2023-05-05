@@ -15,7 +15,34 @@
 <script src="bootstrap/js/jQuery.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
-	
+	$(document).ready(function() {
+		//当提交表单时验证内容，验证过提交到服务器
+		$("#btnSubmit").click(function () {
+			var linkName = $("#linkName").val();
+			var linkUrl = $("#linkUrl").val();
+			var linkEmail = $("#linkEmail").val();
+			var orderNum = $("#orderNum").val();
+			$.ajax({
+				url: "link?type=saveLink",
+				type: "post",
+				data: {
+					linkName: linkName,
+					linkUrl: linkUrl,
+					linkEmail: linkEmail,
+					orderNum: orderNum,
+				},
+				dataType: "json",
+				success: function (data) {
+					if (data.rlt === 1) {
+						alert(data.type === "update" ? "修改成功" : "添加成功");
+						window.location.href = 'link?type=toLink'
+					} else {
+						alert('失败');
+					}
+				}
+			})
+		})
+	});
 </script>
 </head>
 <body>
@@ -29,7 +56,7 @@
 						<label>链接编号：</label>
 					</td>
 					<td>
-						<input type="text" id="linkId" name="linkId" />
+						<input type="text" id="orderNum" name="orderNum" />
 						<span id="errorId" style="color: red"></span>
 					</td>
 				</tr>

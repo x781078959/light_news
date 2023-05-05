@@ -186,4 +186,76 @@ public class NewDaoImpl implements NewDao{
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public boolean existNewByTypeId(int typeId) {
+		String sql = "SELECT COUNT(*) count FROM t_news WHERE typeId=?";
+		long result = 0;
+		QueryRunner queryRunner = new QueryRunner(JdbcUtilsV2.getDataSource());
+		try {
+			result = queryRunner.query(sql, new ScalarHandler<Long>(), typeId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result > 0 ? true : false;
+	}
+
+	@Override
+	public List<News> newestNewsList() {
+		StringBuffer sql=new StringBuffer();
+		sql.append("SELECT * FROM t_news ");
+		sql.append("ORDER BY publishDate DESC LIMIT 0,8 ");
+		List<News> list=null;
+		QueryRunner queryRunner=new QueryRunner(JdbcUtilsV2.getDataSource());
+		try {
+			list=queryRunner.query(sql.toString(), new BeanListHandler<>(News.class));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<News> hotNewsList() {
+		StringBuffer sql=new StringBuffer();
+		sql.append("SELECT * FROM t_news WHERE isHot=1 ");
+		sql.append("ORDER BY publishDate DESC LIMIT 0,8 ");
+		List<News> list=null;
+		QueryRunner queryRunner=new QueryRunner(JdbcUtilsV2.getDataSource());
+		try {
+			list=queryRunner.query(sql.toString(), new BeanListHandler<>(News.class));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<NewsVo> allIndexNewsList(int typeId) {
+		StringBuffer sql=new StringBuffer();
+		sql.append("SELECT * FROM  t_news,t_newsType ");
+		sql.append("WHERE typeId=newsTypeId AND typeId=? ");
+		sql.append("ORDER BY publishDate DESC ");
+		sql.append("LIMIT 0,8");
+		List<NewsVo> list=null;
+		QueryRunner queryRunner=new QueryRunner(JdbcUtilsV2.getDataSource());
+		try {
+			list= queryRunner.query(sql.toString(), new BeanListHandler<>(NewsVo.class), typeId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	@Override
+	public int newsClick(int newsId) {
+		String sql="UPDATE t_news SET click=click+1 WHERE newsId=?";
+		int result=0;
+		QueryRunner queryRunner=new QueryRunner(JdbcUtilsV2.getDataSource());
+		try {
+			result=queryRunner.update(sql, newsId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

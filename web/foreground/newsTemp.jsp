@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,7 +32,9 @@
 			<div class="dataHeader">最新新闻</div>
 			<div class="datas">
 				<ul>
-					
+					<c:forEach var="newestNews" items="${newestNewsList }">
+						<li><a href="news?action=detail&newsId=${newestNews.newsId }" title="${newestNews.title }">${fn:substring(newestNews.title,0,22) }</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -39,7 +42,9 @@
 			<div class="dataHeader">热门新闻</div>
 			<div class="datas">
 				<ul>
-					
+					<c:forEach var="hotNews" items="${hotNewsList }">
+						<li><a href="news?action=detail&newsId=${hotNews.newsId }" title="${hotNews.title }">${fn:substring(hotNews.title,0,22) }</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
