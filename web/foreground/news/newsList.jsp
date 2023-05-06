@@ -9,7 +9,7 @@
 			<c:forEach var="newsList" items="${newsListWithType }">
 				<li>
 					<span>
-						<%--[<fmt:formatDate value="${newsList.publishDate }" type="date" pattern="yyyy-MM-dd"/>]--%>
+						[<fmt:formatDate value="${newsList.publishDate }" type="date" pattern="yyyy-MM-dd"/>]
 					</span>&nbsp;&nbsp;
 					<a href="news?action=detail&newsId=${newsList.newsId }" title="${newsList.title }">
 						${fn:substring(newsList.title,0,42) }

@@ -9,7 +9,6 @@ import com.gw.dao.impl.NewDaoImpl;
 import com.gw.pojo.News;
 import com.gw.service.NewsService;
 import com.gw.pojo.NewsVo;
-import com.oracle.wls.shaded.org.apache.bcel.generic.NEW;
 
 public class NewsServiceImpl implements NewsService {
 

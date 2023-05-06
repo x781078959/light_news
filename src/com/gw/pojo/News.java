@@ -1,28 +1,21 @@
 package com.gw.pojo;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class News {
-	private int newsId;//新闻 id
-	private String title;//新闻标题
-	private String content;//新闻内容
-	private String publishDate;//发布日期
+	private int newsId;//新闻id
+	private String title;//标题
+	private String content;//内容
+	private Date publishDate;//发布时间
 	private String author;//作者
-	private int typeId=-1;//新闻类别编号
+	private int typeId=-1;//类型
+	private String typeName;//新闻类别名
 	private int click;//点击量
 	private int isHead;//是否是头条
-	private int isImage;//是否是图片新闻
+	private int isImage;//是否包含图片
 	private String imageName;//图片
-	private int isHot;//是否是热点新闻
-	
-	public News() {
-		super();
-	}
-	
-	public News(int newsId, String title) {
-		super();
-		this.newsId = newsId;
-		this.title = title;
-	}
-	
+	private int isHot;//热点
 	public int getNewsId() {
 		return newsId;
 	}
@@ -41,10 +34,10 @@ public class News {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getPublishDate() {
-		return  publishDate;
+	public Date getPublishDate() {
+		return publishDate;
 	}
-	public void setPublishDate(String publishDate) {
+	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
 	}
 	public String getAuthor() {
@@ -58,6 +51,12 @@ public class News {
 	}
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
+	}
+	public String getTypeName() {
+		return typeName;
+	}
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 	public int getClick() {
 		return click;
@@ -88,13 +87,6 @@ public class News {
 	}
 	public void setIsHot(int isHot) {
 		this.isHot = isHot;
-	}
-
-	@Override
-	public String toString() {
-		return "News [newsId=" + newsId + ", title=" + title + ", content=" + content + ", publishDate=" + publishDate
-				+ ", author=" + author + ", typeId=" + typeId + ", click=" + click
-				+ ", isHead=" + isHead + ", isImage=" + isImage + ", imageName=" + imageName + ", isHot=" + isHot + "]";
 	}
 	
 	

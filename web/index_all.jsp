@@ -12,7 +12,8 @@
 <head>
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>闪电新闻网</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>青岛华文技工学校</title>
 	<link href="style/news.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -60,10 +61,11 @@
 				<ul>
 			</c:if>
 			<li>
-				<%--<fmt:formatDate value="${indexNews.publishDate }" type="date" pattern="MM-dd"/>&nbsp;--%>
+				<fmt:formatDate value="${indexNews.publishDate }" type="date" pattern="yyyy-MM-dd"/>&nbsp;
 				<a href="news?action=detail&newsId=${indexNews.newsId }" title="${indexNews.title }">
-						${fn:substring(indexNews.title,0,18) }
+						${fn:substring(indexNews.title,0,21) }
 				</a>
+
 			</li>
 			<c:if test="${oneStatus.last }">
 				</ul>

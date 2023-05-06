@@ -10,6 +10,7 @@ import com.gw.service.TypeService;
 import com.gw.service.impl.NewsServiceImpl;
 import com.gw.service.impl.TypeServiceImpl;
 import com.gw.utils.Constants;
+import com.gw.utils.DateUtil;
 import com.gw.utils.PageUtil;
 import com.gw.utils.StringUtil;
 import jakarta.servlet.ServletException;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -60,8 +62,8 @@ public class NewsServlet extends HttpServlet {
             share(request, response);
             newsAll(request, response);
         }else if(action.equals("detail")){
-            newsDetail(request, response);
             share(request, response);
+            newsDetail(request, response);
         }
     }
 
@@ -154,7 +156,7 @@ public class NewsServlet extends HttpServlet {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
             String publishDate = dateTimeFormatter.format(now);
-            news.setPublishDate(publishDate);
+            news.setPublishDate(DateUtil.convertStr2Date(publishDate));
             rlt = newsService.addNews(news);
             type = "add";
         }else{

@@ -5,6 +5,7 @@
     <title></title>
   </head>
   <body>
-  <jsp:forward page="/background/login.jsp"/>
+  <% response.sendRedirect("index"); %>
+<%--  <jsp:forward page="index_all.jsp"/>--%>
   </body>
 </html>

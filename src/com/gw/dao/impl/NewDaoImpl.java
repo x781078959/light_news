@@ -167,7 +167,7 @@ public class NewDaoImpl implements NewDao{
 
 	@Override
 	public News selectNewsById(int id) {
-		String sql = "SELECT * FROM t_news WHERE newsId =?";
+		String sql = "SELECT * FROM t_news t1,t_newsType t2 WHERE t1.typeId=t2.newsTypeId AND t1.newsId=?";
 		try {
 			return qr.query(sql, new BeanHandler<>(News.class), id);
 		} catch (SQLException e) {
@@ -205,14 +205,13 @@ public class NewDaoImpl implements NewDao{
 		StringBuffer sql=new StringBuffer();
 		sql.append("SELECT * FROM t_news ");
 		sql.append("ORDER BY publishDate DESC LIMIT 0,8 ");
-		List<News> list=null;
 		QueryRunner queryRunner=new QueryRunner(JdbcUtilsV2.getDataSource());
 		try {
-			list=queryRunner.query(sql.toString(), new BeanListHandler<>(News.class));
+			return queryRunner.query(sql.toString(), new BeanListHandler<>(News.class));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return null;
 	}
 
 	@Override
@@ -220,14 +219,13 @@ public class NewDaoImpl implements NewDao{
 		StringBuffer sql=new StringBuffer();
 		sql.append("SELECT * FROM t_news WHERE isHot=1 ");
 		sql.append("ORDER BY publishDate DESC LIMIT 0,8 ");
-		List<News> list=null;
 		QueryRunner queryRunner=new QueryRunner(JdbcUtilsV2.getDataSource());
 		try {
-			list=queryRunner.query(sql.toString(), new BeanListHandler<>(News.class));
+			return queryRunner.query(sql.toString(), new BeanListHandler<>(News.class));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return null;
 	}
 
 	@Override

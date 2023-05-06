@@ -1,4 +1,7 @@
 package com.gw.pojo;
+
+import java.util.Date;
+
 /**
  * 新闻视图类
  * @author Administrator
@@ -8,7 +11,7 @@ public class NewsVo {
 	private int newsId;
 	private String title;
 	private String typeName;
-	private String publishDate;
+	private Date publishDate;
 	public int getNewsId() {
 		return newsId;
 	}
@@ -27,11 +30,12 @@ public class NewsVo {
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	public String getPublishDate() {
+
+	public Date getPublishDate() {
 		return publishDate;
 	}
-	public void setPublishDate(String publishDate) {
+
+	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
 	}
-
 }

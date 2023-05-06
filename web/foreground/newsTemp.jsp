@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>中华新闻网</title>
+<title>闪电新闻网</title>
+	<link rel="icon" href="<%=request.getContextPath()%>/images/logo.jpg">
 <link href="style/news.css" rel="stylesheet">
 <link href="style/index.css" rel="stylesheet">
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -33,7 +34,7 @@
 			<div class="datas">
 				<ul>
 					<c:forEach var="newestNews" items="${newestNewsList }">
-						<li><a href="news?action=detail&newsId=${newestNews.newsId }" title="${newestNews.title }">${fn:substring(newestNews.title,0,22) }</a></li>
+						<li><a href="news?action=detail&newsId=${newestNews.newsId }" title="${newestNews.title }">${fn:substring(newestNews.title,0,29) }</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -43,7 +44,7 @@
 			<div class="datas">
 				<ul>
 					<c:forEach var="hotNews" items="${hotNewsList }">
-						<li><a href="news?action=detail&newsId=${hotNews.newsId }" title="${hotNews.title }">${fn:substring(hotNews.title,0,22) }</a></li>
+						<li><a href="news?action=detail&newsId=${hotNews.newsId }" title="${hotNews.title }">${fn:substring(hotNews.title,0,29) }</a></li>
 					</c:forEach>
 				</ul>
 			</div>

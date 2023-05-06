@@ -18,13 +18,13 @@ public class PageUtil {
 		if(currentPage==1){
 			pageCode.append("<li class='disabled'><a>上一页</a></li>");
 		}else{
-			pageCode.append("<li><a href='news?action=list&typeId="+typeId+"&page="+(currentPage-1)+"'>上一页</a></li>");			
+			pageCode.append("<li><a href='news?action=newsList&typeId="+typeId+"&page="+(currentPage-1)+"'>上一页</a></li>");
 		}
 		pageCode.append("&nbsp;&nbsp;");
 		if(currentPage==totalPage){
 			pageCode.append("<li class='disabled'><a>下一页</a></li>");
 		}else{
-			pageCode.append("<li><a href='news?action=list&typeId="+typeId+"&page="+(currentPage+1)+"'>下一页</a></li>");			
+			pageCode.append("<li><a href='news?action=newsList&typeId="+typeId+"&page="+(currentPage+1)+"'>下一页</a></li>");
 		}
 		pageCode.append("</ul>");
 		return pageCode.toString();
