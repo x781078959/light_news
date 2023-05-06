@@ -13,7 +13,7 @@
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>青岛华文技工学校</title>
+	<title>闪电新闻网</title>
 	<link href="style/news.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
