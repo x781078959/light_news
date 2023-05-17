@@ -50,7 +50,7 @@ public class TypeServlet extends HttpServlet {
         }else if(action.equals("updateType")){
             UpdateType(req, resp);
         }else if(action.equals("toType")){
-            resp.sendRedirect("/background/newsType/newsTypeSave.jsp");
+            req.getRequestDispatcher("/background/newsType/newsTypeSave.jsp").forward(req, resp);
         }
 
     }

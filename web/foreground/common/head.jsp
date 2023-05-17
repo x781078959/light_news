@@ -4,7 +4,7 @@
 <div class="row-fluid">
       <div class="logo">
           <div class="logo_img">
-              <img src="/images/logo.jpg" width="80px" alt="闪电新闻网" title="闪电新闻网" />
+              <img src="<%=request.getContextPath()%>/images/logo.jpg" width="80px" alt="闪电新闻网" title="闪电新闻网" />
               <h2 style="font-family:Arial,ui-serif;position: absolute; left: 390px; top:20px;">闪电新闻网</h2>
           </div>
           <div class="weather">

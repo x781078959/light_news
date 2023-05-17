@@ -24,7 +24,7 @@ public class UserServlet extends HttpServlet {
         if("login".equals(action)){
             //登录
             login(request, response);
-        }else if(action.equals("logout")){
+        }else if("logout".equals(action)){
             //调用退出登陆的方法
             logout(request, response);
         }else{

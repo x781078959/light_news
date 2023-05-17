@@ -57,7 +57,7 @@
 						<td>${links.linkUrl}</td>
 						<td>${links.linkEmail}</td>
 						<td>
-							<button class="btn btn-mini btn-info" type="button" id="addLinkBtn" <%--onclick="updateLinkById(${links.linkId})"--%>>修改</button>&nbsp;&nbsp;
+							<button class="btn btn-mini btn-info" type="button" id="addLinkBtn" onclick="updateLinkById(${links.linkId})">修改</button>&nbsp;&nbsp;
 							<button class="btn btn-mini btn-danger" type="button" onclick="linkDelete(${links.linkId})">删除</button>
 						</td>
 				</tr>
@@ -91,9 +91,9 @@
 		</div>
 	</div>
 <script>
-	$("#addLinkBtn").click(function() {
+	/*$("#addLinkBtn").click(function() {
 		$("#addLinkDia").dialog("open");
-	});
+	});*/
 	// 添加模块框
 	$("#addLinkDia").dialog({
 		autoOpen: false,
