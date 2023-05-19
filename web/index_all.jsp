@@ -10,10 +10,11 @@
 %>
 <html>
 <head>
-	<base href="<%=basePath%>">
+<%--	<base href="<%=basePath%>">--%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>闪电新闻网</title>
+	<link rel="icon" href="images/logo.jpg">
 	<link href="style/news.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -22,6 +23,10 @@
 	<script src="bootstrap/js/bootstrap.js"></script>
 	<script src="js/slider.js"></script>
 	<script type="text/javascript">
+		try {
+			window.console && window.console.log && (console.log("这是一个最好的时代，\n科技的发展给予了每个人创造价值的可能性；\n这也是一个最充满想象的时代，\n每一位心怀梦想的人，终会奔向星辰大海。\n百度与你们一起仰望星辰大海，携手共筑未来！\n"),
+					console.log("%c百度2023校园招聘简历投递：https://talent.baidu.com/jobs/list", "color:red"))
+		} catch (e) {}
 		$(function(){
 			$('#focus').flexslider({
 				animation: "slide",
@@ -29,6 +34,7 @@
 				easing:"swing"
 			});
 		});
+
 	</script>
 </head>
 <body>

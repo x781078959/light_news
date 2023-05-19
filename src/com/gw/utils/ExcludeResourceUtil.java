@@ -10,8 +10,11 @@ package com.gw.utils;
  * @Version: 1.0
  */
 public class ExcludeResourceUtil {
-    static String[] urls = {"/light_news/backgroud/login","/light_news/index","/light_news/info","/info","/user","/light_news/user","/news","/light_news/news",
-            ".js",".json",".css",".ico",".jpg",".png",".gif",".map",".json",".woff",".eot",".woff2",".ttf",".jsp",".mp4"};
+    static String[] urls = {"/light_news/index","/light_news/info","/info",
+            "/user","/light_news/user","/news", "/light_news/news","/index",
+            "/type","/light_news/type","/link","/light_news/link",
+            ".js",".json",".css",".ico", ".jpg",".png",".gif",".map",
+            ".json",".woff",".eot",".woff2", ".ttf",".jsp",".mp4"};
 
     public static boolean shouldExclude(String uri){
         for (String str : urls) {
