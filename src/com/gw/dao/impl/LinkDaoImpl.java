@@ -3,7 +3,6 @@ package com.gw.dao.impl;
 import com.gw.dao.LinkDao;
 import com.gw.pojo.LinkVo;
 import com.gw.utils.JdbcUtilsV2;
-import com.oracle.wls.shaded.org.apache.bcel.generic.NEW;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;

@@ -1,15 +1,14 @@
 package com.gw.filter;
 
-import com.gw.dto.UserDto;
-import com.gw.pojo.User;
-import com.gw.utils.Constants;
-import com.gw.utils.ExcludeResourceUtil;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
+import com.gw.dto.UserDto;
+import com.gw.utils.ExcludeResourceUtil;
+
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -20,13 +19,21 @@ import java.io.IOException;
  * @Author: 谢金宸
  * @Create: 2023.4.30 下午 1:24
  * @Version: 1.0
- */
+ * */
+
+
 @WebFilter(filterName = "AuthorizationFilter",
         urlPatterns = {"/*"})
 public class AuthorizationFilter implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        Filter.super.init(filterConfig);
+    }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+        Filter.super.destroy();
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -52,6 +59,5 @@ public class AuthorizationFilter implements Filter {
                 filterChain.doFilter(servletRequest,servletResponse);
             }
         }
-
     }
 }

@@ -136,7 +136,16 @@
 						<label>新闻内容：</label>
 					</td>
 					<td>
-						<label for="content"><textarea class="ckeditor" id="content" name="content">${news.content}</textarea></label>
+						<label for="content">
+							<textarea class="ckeditor" id="content" name="content">${news.content}</textarea>
+							<script>
+								window.onload = function()
+								{
+									CKEDITOR.replace('content');
+									// 	,{ height: '240px', width: '100%' }
+								};
+							</script>
+						</label>
 						<span id="errorContent" style="color: red; "></span>
 					</td>
 				</tr>

@@ -1,6 +1,6 @@
 package com.gw.servlet;
 
-import com.gw.dao.TypeDao;
+
 import com.gw.pojo.LinkVo;
 import com.gw.pojo.News;
 import com.gw.pojo.NewsType;
@@ -11,13 +11,12 @@ import com.gw.service.TypeService;
 import com.gw.service.impl.LinkServiceImpl;
 import com.gw.service.impl.NewsServiceImpl;
 import com.gw.service.impl.TypeServiceImpl;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +37,6 @@ public class IndexServlet extends HttpServlet {
     TypeService typeService=new TypeServiceImpl();
     public IndexServlet() {
         super();
-    }
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-
     }
 
     @Override
@@ -73,8 +68,7 @@ public class IndexServlet extends HttpServlet {
         //获取友情链接
         LinkService linkService = new LinkServiceImpl();
         List<LinkVo> links = linkService.getAllLinks();
-		req.setAttribute("links", links);
+        req.setAttribute("links", links);
         req.getRequestDispatcher("index_all.jsp").forward(req, resp);
     }
-
 }

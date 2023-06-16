@@ -1,13 +1,14 @@
 package com.gw.filter;
 
+
 import com.gw.utils.Constants;
 import com.gw.utils.ExcludeResourceUtil;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.annotation.WebInitParam;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebFilter(filterName = "CharacterEncodingFilter",
@@ -16,11 +17,13 @@ import java.io.IOException;
 public class CharacterEncodingFilter implements Filter {
     private String ENCODING = null;
 
-    /**
+/**
      * 初始化filter会回调
      * @param filterConfig
      * @throws ServletException
-     */
+ * */
+
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.ENCODING = filterConfig.getInitParameter("ENCODING");
