@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/error/400.html" value="file://$PROJECT_DIR$/web/WEB-INF/error" />
+        <entry key="file://$PROJECT_DIR$/web/background/link/linkList.jsp" value="file://$PROJECT_DIR$/web/background/link" />
+        <entry key="file://$PROJECT_DIR$/web/background/login.jsp" value="file://$PROJECT_DIR$/web/background" />
+        <entry key="file://$PROJECT_DIR$/web/background/news/newsList.jsp" value="file://$PROJECT_DIR$/web/background/news" />
+        <entry key="file://$PROJECT_DIR$/web/background/news/newsSave.jsp" value="file://$PROJECT_DIR$/web/background/news" />
+      </map>
+    </option>
+  </component>
+</project>
